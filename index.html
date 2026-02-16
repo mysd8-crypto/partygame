@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahrheit oder Pflicht</title>
+
+    <!-- PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.2.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2026.2.1/core.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Wahrheit oder Pflicht - I challenge U randomly...</h1>
+
+    <h4>1. Geben Sie die Gruppengröße an:</h4>
+    <input type="text" id="group" placeholder="Gruppengröße..."/>
+    <button id="group-confirm-button">Bestätigen</button>
+
+    <h4>2. Geben Sie ihre Namen nacheinander mit einem Komma abgetrennt ein:</h4>
+    <input type="text" id="individual" placeholder="Namen..."/>
+    <button id="player-confirm-button">Bestätigen</button>
+
+    <div id="group-size-output"></div>
+    <div id="player-name-position-output"></div>
+
+    <br>
+    <button id="randomize-button">Time to shine...</button>
+    <div id="truth-dare-output"></div>
+
+    <!-- Spotify IFrame -->
+    <div id="embed-iframe" style="width:300px; height:80px;"></div>
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
+<script>
+let spotifyController;
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    const element = document.getElementById('embed-iframe');
+
+    // Leerer Track beim Start, nur Controller erzeugen
+    const options = {
+        width: '300',
+        height: '80',
+        uri: 'spotify:track:2BDRHCzenjtyyZ21Whe98B' // nur Platzhalter
+    };
+
+    IFrameAPI.createController(element, options, (controller) => {
+        spotifyController = controller;
+        window.spotifyController = controller;
+    });
+};
+
+// JS Event für Trackwechsel
+document.addEventListener("play-track", (e) => {
+    if(spotifyController){
+        spotifyController._api.loadUri(e.detail).then(() => {
+            spotifyController.play();
+        });
+    } else {
+        console.log("Spotify Controller noch nicht bereit!");
+    }
+});
+document.addEventListener("play-track", (e) => {
+    // Wir greifen auf e.detail zu, wo die Spotify URI drinsteckt
+    const trackUri = e.detail;
+    
+    if (window.spotifyController) {
+        window.spotifyController.loadUri(trackUri).then(() => {
+            window.spotifyController.play();
+        }).catch((err) => {
+            console.error("Fehler beim Laden des Tracks:", err);
+        });
+    } else {
+        console.warn("Spotify Controller ist noch nicht bereit. Versuche es gleich erneut.");
+    }
+});
+</script>
+
+
+    <!-- PyScript -->
+    <script type="py" src="main.py"></script>
+</body>
+</html>
