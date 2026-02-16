@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Spotify Callback</title>
+  </head>
+  <body>
+    <script>
+      // Token aus URL extrahieren
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const token = params.get("access_token");
+      console.log("Spotify Access Token:", token);
+      alert("Token in Konsole prüfen");
+    </script>
+  </body>
+</html>
