@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahrheit oder Pflicht</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.2.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2026.2.1/core.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+    <h1>Wahrheit oder Pflicht - I challenge U randomly...</h1>
+
+    <h4>1. Geben Sie die Gruppengröße an:</h4>
+    <input type="text" id="group" placeholder="Gruppengröße..."/>
+    <button id="group-confirm-button">Bestätigen</button>
+
+    <h4>2. Geben Sie ihre Namen nacheinander mit einem Komma abgetrennt ein (z.B. Linda, Noah, usw.):</h4>
+    <input type="text" id="individual" placeholder="Namen..."/>
+    <button id="player-confirm-button">Bestätigen</button>
+
+    <br>
+    <br>
+
+    <div id="group-size-output"></div>
+
+    <div id="player-name-position-output"></div>
+
+    <br>
+    <br>
+
+    <button id="randomize-button">Time to shine...</button>
+
+    <br>
+    <br>
+
+    <div id="truth-dare-output"></div>
+
+    <script type="py" src="./main.py" config="./pyscript.json"></script>
+</body>
+</html>
